@@ -1,14 +1,14 @@
 # Spacecraft Anomaly Challenge
-Using an LSTM for anomaly detection in sensor measurements collected from a large spacecraft.
+Using a Temporal Convolutional Network for anomaly detection in sensor measurements collected from a large spacecraft.
 
-## LSTM Classifier - Python
+## Temporal Convolutional Network Anomaly Detector - Python
 ### Resource - Kaggle
 This project utilizes sensor spacecraft data measured by the European Space Agency (ESA). This dataset has been made publically available via Kaggle for an anomaly detection challenge. Visit [here](https://www.kaggle.com/competitions/esa-adb-challenge/overview) for data resource and more information.
 ### Method
 The data is first loaded into memory using Pandas. Target channels for tracking are also imported. Data preprocessing steps are conducted.
-A train-validation split is created (80:20 split) and the feature values are scaled using Scikit-Learn's MinMaxScaler.
-A TensorFlow dataset bins the time-series data into sliding windows for model training. After binning, batch size is declared and the processed dataset is created.
-Next, I build the baseline model. This model features 2 LSTM layers and 2 fully connected layers for classification. When compiling the model, I use the Adam optimizer and a F-0.5 evaluation metric per the challenge. The metric takes the following form:
+A train-validation split is created (80:20 split) and the feature values are scaled using Scikit-Learn's RobustScaler for proper scaling with anomalous data.
+A PyTorch dataset bins the time-series data into sliding windows for model training. After binning, batch size is declared and the processed dataset is created.
+Next, I build the baseline model. This model features 2 convolutional layers and 1 fully connected layer for classification. When configuring the model, I use the Adam optimizer and a binary cross-entropy with logits loss as the criterion. At this point I use the pos_weight argument to address class imbalance within the data. In the training loop, I use the F-0.5 evaluation metric to score the validation dataset. The metric takes the following form:
 
 
 $$F_{0.5} = \frac{(1+0.5^2)*Precision_{e_{corr}}*Recall_e}{0.5^2*Precision_{e_{corr}}+Recall_e}$$
@@ -20,9 +20,10 @@ The goal of the model is to minimize false positives.
 ### Dependencies
 The program requires the following libraries:
 1) Pandas
-2) TensorFlow
+2) PyTorch
 3) Scikit-Learn
 4) Matplotlib
+5) Numpy
 
 The notebook was tested using Python 3.10.11.
 
@@ -39,6 +40,8 @@ An integrated development environment (IDE) is necessary to run this notebook.
 V1.0 - The Jupyter Notebook is created. Data processing pipeline is drafted and functional. 
 
 V1.1 - EDA is performed.
+
+V1.2 - Changed the model API from TensorFlow to PyTorch to build a TCN over an LSTM. The baseline model is drafted. 
 
 
 ## Run Instructions
