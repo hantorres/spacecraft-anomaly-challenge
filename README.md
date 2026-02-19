@@ -43,6 +43,8 @@ V1.1 - EDA is performed.
 
 V1.2 - Changed the model API from TensorFlow to PyTorch to build a TCN over an LSTM. The baseline model is drafted. 
 
+V1.3 - First training run done: observed poor results. Update pooling strategy. Update training loop to test classification threshold values. Update functions for faster training (training function, F0.5 calculation, and dataset loaders updated). 
+
 
 ## Run Instructions
 Once the dependencies are installed and the pre-requisites and setup have been completed, you are all set to run the notebook. Furthermore, the outputs of the program are the following:
